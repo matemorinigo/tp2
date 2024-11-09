@@ -8,10 +8,10 @@ public class Nortaichian extends Guerrero{
 	public Nortaichian(Bando bando) {
 		super(66, 18, bando);
 	}
-	
+
 	@Override
 	public void atacar(Guerrero enemigo) {
-		if(!this.equals(enemigo) && !this.isDesmayado() && this.esPiedra <= 0) {
+		if(!this.equals(enemigo) && !this.isDesmayado() && this.esPiedra <= 0) { /// es piedra no deberia llegar nunca a ser < 0
 			int damage = this.getBasicDamage();
 			double salud = this.getSaludActual()*1.04;
 			
@@ -19,7 +19,7 @@ public class Nortaichian extends Guerrero{
 				damage*=2;
 			
 			enemigo.esAtacado(damage);
-			if(this.getSaludInicial() > salud)
+			if(this.getSaludInicial() > salud) /// por que este if?
 				this.setSaludActual(salud);
 			else
 				this.setSaludActual(this.getSaludInicial());

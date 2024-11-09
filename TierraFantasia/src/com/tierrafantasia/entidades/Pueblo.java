@@ -5,7 +5,6 @@ public class Pueblo {
 	public Bando bando;
 	
 	public Pueblo(Ejercito ejercito, Bando bando) {
-		super();
 		this.ejercito = ejercito;
 		this.bando = bando;
 	}

@@ -16,10 +16,13 @@ public class InputFile {
 
     LinkedList<Ejercito> ejercitos;
     Mapa mapa;
+    int puebloInicio;
+    int puebloFin;
+    int cantPueblos;
 
     public InputFile(String filename){
         ejercitos = new LinkedList<>();
-        mapa = new Mapa();
+        mapa = Mapa.getMapaUnico();
         try {
             procesarInput(filename);
         } catch (Exception e) {
@@ -40,12 +43,17 @@ public class InputFile {
         String linea;
 
         linea = br.readLine();
-        int cantEjercitos = Integer.parseInt(linea);
+        this.cantPueblos = Integer.parseInt(linea);
+        double[][] matrizAdyacencia = new double[this.cantPueblos][this.cantPueblos];
+        inicializarMatriz(matrizAdyacencia);
         int cantUnidades;
+        int ciudadOrigen;
+        int ciudadDestino;
+        int costo;
         Raza raza;
         Bando bando;
 
-        for (int i = 0; i < cantEjercitos; i++) {
+        for (int i = 0; i < this.cantPueblos; i++) {
             linea = br.readLine();
             sc = new Scanner(linea);
             sc.nextInt();
@@ -61,7 +69,63 @@ public class InputFile {
             }
         }
 
+        linea = br.readLine();
+        sc = new Scanner(linea);
+        sc.useDelimiter(" -> ");
+
+        puebloInicio = sc.nextInt();
+        puebloFin = sc.nextInt();
+
+        sc.close();
+
+        while((linea = br.readLine()) != null){
+            sc = new Scanner(linea);
+            ciudadOrigen = sc.nextInt();
+            ciudadDestino = sc.nextInt();
+            costo = sc.nextInt();
+
+            matrizAdyacencia[ciudadOrigen-1][ciudadDestino-1] = costo;
+
+            sc.close();
+        }
+
+        this.mapa.setMatAdy(matrizAdyacencia);
+        this.mapa.setPuebloInicial(puebloInicio);
+        this.mapa.setPuebloFinal(puebloFin);
+
         br.close();
     }
 
+    private void inicializarMatriz(double[][] matriz){
+        for (int i = 0; i < matriz.length; i++){
+            for (int j = 0; j < matriz.length; j++){
+                if (i != j) {
+                    matriz[i][j] = Double.POSITIVE_INFINITY;
+                } else {
+                    matriz[i][j] = 0;
+                }
+            }
+        }
+    }
+
+
+    public LinkedList<Ejercito> getEjercitos() {
+        return ejercitos;
+    }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
+    public int getPuebloInicio() {
+        return puebloInicio;
+    }
+
+    public int getPuebloFin() {
+        return puebloFin;
+    }
+
+    public int getCantPueblos() {
+        return cantPueblos;
+    }
 }

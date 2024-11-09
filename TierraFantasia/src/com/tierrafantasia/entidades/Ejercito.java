@@ -4,10 +4,10 @@ import com.tierrafantasia.utils.Heap;
 
 
 public class Ejercito {
-	//private LinkedList<Guerrero> unidades;
-	//private Bando bando;
+
 	public Heap<Guerrero> unidades = new Heap<>();
-	
+	//public List<Guerrero> unidades;
+
 	public Ejercito(int cantUnidades, Raza raza, Bando bando) {
 
 		switch(raza){
@@ -17,13 +17,20 @@ public class Ejercito {
 			case NORTAICHIAN -> sumaNortaichian(cantUnidades, bando);
 		}
 
+	} //carga la Lista de guerreros
+
+	//El ejercito agarra al primer guerrero, este guerrero ataca al ejercito enemigo
+	public void atacar(Ejercito enemigo) {
+		Guerrero unidad = this.unidades.getFirst();
+		if (enemigo.sinUnidades() && unidad.getSaludActual() != unidad.getSaludInicial()) {
+
+		} else {
+			this.unidades.getFirst().atacar(enemigo);
+		}
+
 	}
 
-	
-	public void atacar(Ejercito enemigo) {
-		this.unidades.getFirst().atacar(enemigo);
-	}
-	
+
 	public void descansar(Ejercito aliado) {
 		Guerrero unidad = null;
 		Heap<Guerrero> aux = new Heap<>();
@@ -39,12 +46,12 @@ public class Ejercito {
 		this.unidades = aux;
 		
 	}
-	
+	//cuando un ejercito es atacado recibe el daño y lo pasa a su primer guerrero en la cola/heap
 	public void esAtacado(int damage) {
 		Guerrero unidad = this.unidades.getFirst();
 		unidad.esAtacado(damage);
 		
-		if(unidad.isDesmayado()) 
+		if(unidad.getSaludActual() <=0 )  //si se queda sin salud, se saca de la cola
 			this.unidades.poll();
 	}
 	

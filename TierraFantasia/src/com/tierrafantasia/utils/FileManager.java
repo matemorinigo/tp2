@@ -18,7 +18,6 @@ public class FileManager {
 	public static final String ruta4 = "..\\TierraFantasia\\res\\ejemplo4.txt";
 	public static final String ruta5 = "..\\TierraFantasia\\res\\ejemplo5.txt";
 
-	public
 	
 	public static void crearArchivo(String ruta) {
 		try  {  
