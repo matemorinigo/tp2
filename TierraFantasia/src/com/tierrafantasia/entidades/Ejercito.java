@@ -1,17 +1,18 @@
 package com.tierrafantasia.entidades;
 
-import com.tierrafantasia.utils.Heap;
+//import com.tierrafantasia.utils.Heap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Ejercito {
 
 	//public Heap<Guerrero> unidades = new Heap<>();
-	public List<Guerrero> unidades;
+	public List<Guerrero> unidades = new ArrayList<Guerrero>();
 	public  Bando bando;
 	public Ejercito(int cantUnidades, Raza raza, Bando bando) {
-
+		
 		this.bando = bando;
 		switch(raza){
 			case WRIVES -> sumaWrives(cantUnidades);
@@ -36,14 +37,15 @@ public class Ejercito {
 
 
 	public void descansar(Ejercito aliado) {
-		Guerrero aux;
+		
 		for (Guerrero guerrero : this.unidades){  //se aplica la funcion descansar a los aliados
 			guerrero.descansar();
 		}
 
 		int mitad = aliado.unidades.size()/2;
-		List<Guerrero> mitadAliada = aliado.unidades.subList(0,mitad);
-		this.unidades.addAll(0,mitadAliada);
+		for(int i = 0; i < mitad; i++)
+			this.unidades.addFirst(aliado.unidades.removeFirst());
+		
 	}
 
 

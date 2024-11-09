@@ -67,17 +67,30 @@ class TestRazas {
 	void testDescansar() {
 		//verificamos que el tamaño de nuestro ejercito es cantUnidades
 		Assertions.assertEquals(cantUnidades,reralopes.unidades.size());
+		
 		reralopes.descansar(nortaichian);
+		
 		//despues de descansar vamos a tener la mitad del otro ejercito, por lo que
 		//reralopes van a tener 15 unidades mientras que nortaichian van a tener su mitad
 		Assertions.assertEquals(cantUnidades*1.5,reralopes.unidades.size(),0.00001);
 		Assertions.assertEquals((double) cantUnidades*0.5,nortaichian.unidades.size(),0.00001);
-		//reralopes.atacar(radaiteran);
-		//36 -
-
 	}
-
-
+	
+	@Test
+	void testUnidadDesmayada() {
+		Assertions.assertEquals(cantUnidades,radaiteran.unidades.size());
+		wrives.atacar(radaiteran);
+		//36 salud < 113 daño => unidad radaiteran se desmaya
+		Assertions.assertEquals(cantUnidades-1,radaiteran.unidades.size());
+		//Se queda con una unidad menos
+		
+	}
+	/*
+	@Test
+	void testRazaNula() {
+		Assertions.assertThrows(NullPointerException, null)
+	}
+	*/
 
 
 
