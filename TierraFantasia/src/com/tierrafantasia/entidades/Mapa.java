@@ -20,8 +20,7 @@ public class Mapa {
 		
 		return mapaUnico;
 	}
-	
-	
+
 	public void setMatAdy(int[][] matAdy) {
 		this.matAdy = matAdy;
 	}
@@ -53,5 +52,6 @@ public class Mapa {
 	public Pueblo getPueblo(Integer numPueblo) {
 		return this.pueblos.get(numPueblo);
 	}
+	
 	
 }
