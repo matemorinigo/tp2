@@ -1,5 +1,6 @@
-package edu.unlam.avanzada.fantasia;
+package edu.unlam.avanzada.app;
 
+import edu.unlam.avanzada.entidades.Ejercito;
 
 public class App {
 	public static void main(String[] args) {
