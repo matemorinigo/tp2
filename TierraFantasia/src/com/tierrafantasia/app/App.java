@@ -2,10 +2,10 @@ package com.tierrafantasia.app;
 
 import com.tierrafantasia.entidades.*;
 import com.tierrafantasia.utils.InputFile;
-import com.tierrafantasia.utils.ParsingUtils;
+
 
 import java.io.*;
-import java.util.LinkedList;
+
 import java.util.Scanner;
 
 public class App {

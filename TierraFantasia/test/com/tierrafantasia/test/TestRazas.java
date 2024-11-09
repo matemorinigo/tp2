@@ -1,10 +1,9 @@
 package com.tierrafantasia.test;
 
 
-import com.tierrafantasia.app.*;
 import com.tierrafantasia.entidades.*;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class TestRazas {
 
@@ -59,20 +58,20 @@ class TestRazas {
 		nortaichian.atacar(wrives);
 		//108 - (18*2) = 72
 		//el daño que reciben los wrives es el doble de lo normal
-		assertEquals(72,wrives.unidades.getFirst().getSaludActual(), 0.00001);
+		Assertions.assertEquals(72,wrives.unidades.getFirst().getSaludActual(), 0.00001);
 		//La salud del nortaichian no deberia modificarse porque no esta herido
-		assertEquals(66,nortaichian.unidades.getFirst().getSaludActual(),0.00001);
+		Assertions.assertEquals(66,nortaichian.unidades.getFirst().getSaludActual(),0.00001);
 	}
 
 	@Test
 	void testDescansar() {
 		//verificamos que el tamaño de nuestro ejercito es cantUnidades
-		assertEquals(cantUnidades,reralopes.unidades.size());
+		Assertions.assertEquals(cantUnidades,reralopes.unidades.size());
 		reralopes.descansar(nortaichian);
 		//despues de descansar vamos a tener la mitad del otro ejercito, por lo que
 		//reralopes van a tener 15 unidades mientras que nortaichian van a tener su mitad
-		assertEquals(cantUnidades*1.5,reralopes.unidades.size(),0.00001);
-		assertEquals((double) cantUnidades*0.5,nortaichian.unidades.size(),0.00001);
+		Assertions.assertEquals(cantUnidades*1.5,reralopes.unidades.size(),0.00001);
+		Assertions.assertEquals((double) cantUnidades*0.5,nortaichian.unidades.size(),0.00001);
 		//reralopes.atacar(radaiteran);
 		//36 -
 
