@@ -71,6 +71,7 @@ public class Mapa {
 	}
 	
 	public Predecesor_Distancia dijkstra(int nodo_inicial){
+		int nodo_inicial_real = nodo_inicial - 1;
 		int cant_nodos = matAdy.length;
 		int[] predecesores = new int[cant_nodos];
 		double[] distancias = new double[cant_nodos];
@@ -78,22 +79,17 @@ public class Mapa {
 		int cant_visitados = 0;
 
 		for(int i = 0; i < predecesores.length; i++){
-			predecesores[i] = nodo_inicial;
+			predecesores[i] = nodo_inicial_real;
 			distancias[i] = Double.POSITIVE_INFINITY;
 		}
 
-		distancias[nodo_inicial] = 0;
-		visitados[nodo_inicial] = true;
+		distancias[nodo_inicial_real] = 0;
+		visitados[nodo_inicial_real] = true;
 		cant_visitados++;
-        System.out.println("Inicializado:");
-        System.out.println("Predecesores:");
-        System.out.println(predecesores);
-        System.out.println("Inicializado:");
-        System.out.println("Inicializado:");
 
-		for(int i = 0; i < matAdy[nodo_inicial].length; i++){
-			if(matAdy[nodo_inicial][i] != Double.POSITIVE_INFINITY){
-				distancias[i] = matAdy[nodo_inicial][i];
+		for(int i = 0; i < matAdy[nodo_inicial_real].length; i++){
+			if(matAdy[nodo_inicial_real][i] != Double.POSITIVE_INFINITY){
+				distancias[i] = matAdy[nodo_inicial_real][i];
 			}
 		}
 
