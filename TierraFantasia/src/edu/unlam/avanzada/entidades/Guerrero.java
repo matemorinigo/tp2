@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.fantasia;
+package edu.unlam.avanzada.entidades;
 
 public class Guerrero implements Comparable<Guerrero>{
 	private double saludInicial;

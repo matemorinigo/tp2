@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.fantasia;
+package edu.unlam.avanzada.entidades;
 
 public enum Bando{
 	ALIADO,

@@ -57,7 +57,11 @@ public class Heap<T extends Comparable<T>> {
 		
 		return elem;
 	}
-		
+	
+	public int size() {
+		return this.arr.size()-1;
+	}
+	
 	public T getFirst() {
 		return this.arr.get(1);
 	}

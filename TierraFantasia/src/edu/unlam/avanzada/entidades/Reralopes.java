@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.fantasia;
+package edu.unlam.avanzada.entidades;
 
 public class Reralopes extends Guerrero{
 	private int concentracion = 0;

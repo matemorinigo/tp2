@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.fantasia;
+package edu.unlam.avanzada.entidades;
 
 import edu.unlam.avanzada.utils.Heap;
 
@@ -10,12 +10,8 @@ public class Ejercito {
 	
 	public Ejercito(int cantUnidades, String raza, String bando) {
 		Bando aux = null;
-		if(bando.toLowerCase().contains("propio"))
-			aux = Bando.PROPIO;
-		else if(bando.toLowerCase().contains("aliado"))
-			aux = Bando.ALIADO;
-		else if(bando.toLowerCase().contains("enemigo"))
-			aux = Bando.ENEMIGO;
+		
+		aux = Bando.valueOf(bando.toUpperCase());
 		
 		if(raza.toLowerCase().contains("wrives"))
 			sumaWrives(cantUnidades, aux);
@@ -25,18 +21,25 @@ public class Ejercito {
 			sumaRadaiteran(cantUnidades, aux);
 		else if(raza.toLowerCase().contains("nortaichian"))
 			sumaNortaichian(cantUnidades, aux);
-		
-		//this.bando = Bando.valueOf(bando);
 	}
 	
-	
+	public Ejercito(int cantUnidades, String raza, Bando bando) {
+		if(raza.toLowerCase().contains("wrives"))
+			sumaWrives(cantUnidades, bando);
+		else if(raza.toLowerCase().contains("reralopes"))
+			sumaReralopes(cantUnidades, bando);
+		else if(raza.toLowerCase().contains("radaiteran"))
+			sumaRadaiteran(cantUnidades, bando);
+		else if(raza.toLowerCase().contains("nortaichian"))
+			sumaNortaichian(cantUnidades, bando);
+	}
 	
 	public void atacar(Ejercito enemigo) {
 		
 		this.unidades.getFirst().atacar(enemigo);
 	}
 	
-	public void descansar() {
+	public void descansar(Ejercito aliado) {
 		Guerrero unidad = null;
 		Heap<Guerrero> aux = new Heap<>();
 		
@@ -45,8 +48,11 @@ public class Ejercito {
 			unidad.descansar();
 			aux.add(unidad);
 		}
+		for(int i = 0; i < aliado.unidades.size()/2; i++) 
+			aux.add(aliado.unidades.poll());
 		
 		this.unidades = aux;
+		
 	}
 	
 	public void esAtacado(int damage) {
