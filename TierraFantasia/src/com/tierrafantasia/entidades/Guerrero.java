@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.entidades;
+package com.tierrafantasia.entidades;
 
 public class Guerrero implements Comparable<Guerrero>{
 	private double saludInicial;
@@ -13,7 +13,8 @@ public class Guerrero implements Comparable<Guerrero>{
 		this.basicDamage = basicDamage;
 		this.bando = bando;
 	}
-	
+
+
 	public void atacar(Guerrero enemigo) {
 		if(!this.equals(enemigo) && !this.desmayado)
 			enemigo.esAtacado(this.basicDamage);

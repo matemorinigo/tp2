@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.test;
+package com.tierrafantasia.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 

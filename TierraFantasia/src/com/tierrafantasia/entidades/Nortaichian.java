@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.entidades;
+package com.tierrafantasia.entidades;
 
 public class Nortaichian extends Guerrero{
 	

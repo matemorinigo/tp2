@@ -1,4 +1,4 @@
-package edu.unlam.avanzada.utils;
+package com.tierrafantasia.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +17,8 @@ public class FileManager {
 	public static final String ruta3 = "..\\TierraFantasia\\res\\ejemplo3.txt";
 	public static final String ruta4 = "..\\TierraFantasia\\res\\ejemplo4.txt";
 	public static final String ruta5 = "..\\TierraFantasia\\res\\ejemplo5.txt";
-	
+
+	public
 	
 	public static void crearArchivo(String ruta) {
 		try  {  
@@ -112,4 +113,6 @@ public class FileManager {
 			return false;
 		}
 	}
+
+
 }

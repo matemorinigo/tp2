@@ -1,6 +1,6 @@
-package edu.unlam.avanzada.entidades;
+package com.tierrafantasia.entidades;
 
-import edu.unlam.avanzada.utils.Heap;
+import com.tierrafantasia.utils.Heap;
 
 
 public class Ejercito {
@@ -8,34 +8,19 @@ public class Ejercito {
 	//private Bando bando;
 	public Heap<Guerrero> unidades = new Heap<>();
 	
-	public Ejercito(int cantUnidades, String raza, String bando) {
-		Bando aux = null;
-		
-		aux = Bando.valueOf(bando.toUpperCase());
-		
-		if(raza.toLowerCase().contains("wrives"))
-			sumaWrives(cantUnidades, aux);
-		else if(raza.toLowerCase().contains("reralopes"))
-			sumaReralopes(cantUnidades, aux);
-		else if(raza.toLowerCase().contains("radaiteran"))
-			sumaRadaiteran(cantUnidades, aux);
-		else if(raza.toLowerCase().contains("nortaichian"))
-			sumaNortaichian(cantUnidades, aux);
+	public Ejercito(int cantUnidades, Raza raza, Bando bando) {
+
+		switch(raza){
+			case WRIVES -> sumaWrives(cantUnidades, bando);
+			case RERALOPES -> sumaReralopes(cantUnidades, bando);
+			case RADAITERAN -> sumaRadaiteran(cantUnidades, bando);
+			case NORTAICHIAN -> sumaNortaichian(cantUnidades, bando);
+		}
+
 	}
-	
-	public Ejercito(int cantUnidades, String raza, Bando bando) {
-		if(raza.toLowerCase().contains("wrives"))
-			sumaWrives(cantUnidades, bando);
-		else if(raza.toLowerCase().contains("reralopes"))
-			sumaReralopes(cantUnidades, bando);
-		else if(raza.toLowerCase().contains("radaiteran"))
-			sumaRadaiteran(cantUnidades, bando);
-		else if(raza.toLowerCase().contains("nortaichian"))
-			sumaNortaichian(cantUnidades, bando);
-	}
+
 	
 	public void atacar(Ejercito enemigo) {
-		
 		this.unidades.getFirst().atacar(enemigo);
 	}
 	
