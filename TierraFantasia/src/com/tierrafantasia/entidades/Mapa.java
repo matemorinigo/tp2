@@ -112,7 +112,7 @@ public class Mapa {
 		Stack<Integer> pila = new Stack<Integer>();
 		pila.push(puebloFinal);
 		int i=puebloFinal;
-		while((i=pd.getPredecesor(i-1))!=puebloInicial){
+		while((i=pd.getPredecesor(i))!=puebloInicial){
 			pila.push(i);
 		}
 		while(!pila.isEmpty()){

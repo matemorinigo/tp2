@@ -31,20 +31,21 @@ public class Ejercito {
 	}
 
 
-	public void descansar(Ejercito aliado) {
+	public void descansar(Ejercito aliado) { //no laburen con las clases estas que las estoy cam
 		Guerrero unidad = null;
 		Heap<Guerrero> aux = new Heap<>();
-		
+		int cantUnidadesASumar = aliado.unidades.size()/2;
+
 		while(!this.unidades.isEmpty()) {
 			unidad = this.unidades.poll();
 			unidad.descansar();
 			aux.add(unidad);
 		}
-		for(int i = 0; i < aliado.unidades.size()/2; i++) 
+		for(int i = 0; i < cantUnidadesASumar; i++)
 			aux.add(aliado.unidades.poll());
-		
+
 		this.unidades = aux;
-		
+
 	}
 	//cuando un ejercito es atacado recibe el daño y lo pasa a su primer guerrero en la cola/heap
 	public void esAtacado(int damage) {

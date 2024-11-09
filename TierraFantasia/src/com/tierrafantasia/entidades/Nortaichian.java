@@ -19,6 +19,11 @@ public class Nortaichian extends Guerrero{
 				damage*=2;
 			
 			enemigo.esAtacado(damage);
+			//este if creo si no me equivoco
+			//es para que no se sume mas salud de la salud maxima
+			//el tp dice que los nortaichian cada vez que pegan se CURAN un 4%
+			//pero eso no aumenta su salud maxima, que vendria a ser su salud inicial
+			//por eso el if(deberia optimizarlo)
 			if(this.getSaludInicial() > salud) /// por que este if?
 				this.setSaludActual(salud);
 			else
