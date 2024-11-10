@@ -1,13 +1,10 @@
 package com.tierrafantasia.entidades;
 
-import java.security.cert.TrustAnchor;
 import java.util.HashMap;
 import java.util.Stack;
 
-import com.tierrafantasia.entidades.Predecesor_Distancia;
-
 public class Mapa {
-	
+	public final static int KM_POR_DIA = 10;
 	private static Mapa mapaUnico;
 	private double[][] matAdy;
 	private int puebloInicial;
@@ -110,13 +107,30 @@ public class Mapa {
 
 	public void recorrerMapa(Predecesor_Distancia pd, int puebloInicial, int puebloFinal){
 		Stack<Integer> pila = new Stack<Integer>();
+		Pueblo puebloPropio = pueblos.get(puebloInicial);
 		pila.push(puebloFinal);
+		int cantDias = 0;
 		int i=puebloFinal;
 		while((i=pd.getPredecesor(i))!=puebloInicial){
 			pila.push(i);
 		}
-		while(!pila.isEmpty()){
-			System.out.println(pila.pop());
+
+		while(!pila.isEmpty()  ){
+			int puebloSiguiente = pila.pop();
+			Pueblo pueblo = pueblos.get(puebloSiguiente);
+			cantDias += (int)pd.getDistancia(puebloSiguiente) / KM_POR_DIA;
+			if(pueblo.bando == Bando.ALIADO){
+				puebloPropio.ejercito.descansar(pueblo.ejercito);
+
+			} else {
+				puebloPropio.ejercito.batalla(pueblo.ejercito);
+			}
+
+			cantDias++;
 		}
+
+		System.out.println("La mision es factible");
+		System.out.println("Se tarda " + cantDias + " dias en llegar al pueblo final");
+		System.out.println("Sobrevivieron: " + puebloPropio.ejercito.getCantUnidades() + " guerreros");
 	}
 }

@@ -29,34 +29,9 @@ public class App {
 
 		Mapa mapa = Mapa.getMapaUnico();
 		Predecesor_Distancia pd = mapa.dijkstra(file.getPuebloInicio());
-		System.out.println("1: " + pd.getPredecesor(1));
-		System.out.println("2: " + pd.getPredecesor(2));
-		System.out.println("3: " + pd.getPredecesor(3));
-		System.out.println("4: " + pd.getPredecesor(4));
-		System.out.println("5: " + pd.getPredecesor(5));
-		System.out.println("6: " + pd.getPredecesor(6));
-		System.out.println("7: " + pd.getPredecesor(7));
 
-		//mapa.recorrerMapa(pd, file.getPuebloInicio(), file.getPuebloFin());
+		mapa.recorrerMapa(pd, file.getPuebloInicio(), file.getPuebloFin());
 
-
-		
-	}
-
-
-
-	public static void batalla(Ejercito ejercito1, Ejercito ejercito2) {
-		while(!ejercito1.sinUnidades() && !ejercito2.sinUnidades()) {
-			
-			ejercito1.atacar(ejercito2);
-			
-			if(!ejercito2.sinUnidades())
-				ejercito2.atacar(ejercito1);
-		}
-		if(!ejercito1.sinUnidades())
-			System.out.println("Gano ejercito 1");
-		else
-			System.out.println("Gano ejercito 2");
 	}
 	
 }

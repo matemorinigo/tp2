@@ -1,27 +1,23 @@
 package com.tierrafantasia.utils;
 
-import com.tierrafantasia.entidades.Bando;
-import com.tierrafantasia.entidades.Ejercito;
-import com.tierrafantasia.entidades.Mapa;
-import com.tierrafantasia.entidades.Raza;
+import com.tierrafantasia.entidades.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class InputFile {
-
-    LinkedList<Ejercito> ejercitos;
     Mapa mapa;
     int puebloInicio;
     int puebloFin;
     int cantPueblos;
 
     public InputFile(String filename){
-        ejercitos = new LinkedList<>();
+
         mapa = Mapa.getMapaUnico();
         try {
             procesarInput(filename);
@@ -45,6 +41,7 @@ public class InputFile {
         linea = br.readLine();
         this.cantPueblos = Integer.parseInt(linea);
         double[][] matrizAdyacencia = new double[this.cantPueblos][this.cantPueblos];
+        HashMap<Integer, Pueblo> pueblos = new HashMap<>();
         inicializarMatriz(matrizAdyacencia);
         int cantUnidades;
         int ciudadOrigen;
@@ -62,7 +59,7 @@ public class InputFile {
             try {
                 raza = ParsingUtils.parseRaza(sc.next());
                 bando = ParsingUtils.parseBando((sc.next()));
-                this.ejercitos.add(new Ejercito(cantUnidades, raza, bando));
+                pueblos.put(i+1, new Pueblo(new Ejercito(cantUnidades, raza, bando), bando));
                 sc.close();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -92,6 +89,7 @@ public class InputFile {
         this.mapa.setMatAdy(matrizAdyacencia);
         this.mapa.setPuebloInicial(puebloInicio);
         this.mapa.setPuebloFinal(puebloFin);
+        this.mapa.setPueblos(pueblos);
 
         br.close();
     }
@@ -108,14 +106,6 @@ public class InputFile {
         }
     }
 
-
-    public LinkedList<Ejercito> getEjercitos() {
-        return ejercitos;
-    }
-
-    public Mapa getMapa() {
-        return mapa;
-    }
 
     public int getPuebloInicio() {
         return puebloInicio;

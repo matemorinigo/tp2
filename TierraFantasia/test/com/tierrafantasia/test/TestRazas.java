@@ -54,7 +54,7 @@ class TestRazas {
 	}
 
 	@Test
-	void testAtacar() {
+	void testAtacar() { //toy laburando con el atacar de los ejercitos, si podes deja este test en stand-by
 		nortaichian.atacar(wrives);
 		//108 - (18*2) = 72
 		//el daño que reciben los wrives es el doble de lo normal
@@ -66,31 +66,39 @@ class TestRazas {
 	@Test
 	void testDescansar() {
 		//verificamos que el tamaño de nuestro ejercito es cantUnidades
-		Assertions.assertEquals(cantUnidades,reralopes.unidades.size());
+		Assertions.assertEquals(cantUnidades,reralopes.getCantUnidades());
 		
 		reralopes.descansar(nortaichian);
 		
 		//despues de descansar vamos a tener la mitad del otro ejercito, por lo que
 		//reralopes van a tener 15 unidades mientras que nortaichian van a tener su mitad
-		Assertions.assertEquals(cantUnidades*1.5,reralopes.unidades.size(),0.00001);
-		Assertions.assertEquals((double) cantUnidades*0.5,nortaichian.unidades.size(),0.00001);
+		Assertions.assertEquals(cantUnidades*1.5,reralopes.getCantUnidades(),0.00001);
+		Assertions.assertEquals((double) cantUnidades*0.5,nortaichian.getCantUnidades(),0.00001);
 	}
 	
 	@Test
 	void testUnidadDesmayada() {
-		Assertions.assertEquals(cantUnidades,radaiteran.unidades.size());
+		Assertions.assertEquals(cantUnidades,radaiteran.getCantUnidades());
 		wrives.atacar(radaiteran);
 		//36 salud < 113 daño => unidad radaiteran se desmaya
-		Assertions.assertEquals(cantUnidades-1,radaiteran.unidades.size());
+		Assertions.assertEquals(cantUnidades-1,radaiteran.getCantUnidades());
 		//Se queda con una unidad menos
 		
 	}
-	/*
+
 	@Test
 	void testRazaNula() {
-		Assertions.assertThrows(NullPointerException, null)
+		Assertions.assertThrows(NullPointerException.class,
+				() -> {
+					new Ejercito(cantUnidades,null,Bando.ALIADO);
+				});
 	}
-	*/
+
+	@Test
+	void testBatalla(){
+
+	}
+
 
 
 
