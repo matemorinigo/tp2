@@ -10,7 +10,7 @@ public class Wrives extends Guerrero{
 	}
 
 	@Override
-	public void atacar(Guerrero enemigo) {
+	public void atacar(UnidadDeCombate enemigo) {
 		if(this.fueAtacado) {
 			int damage = this.getBasicDamage();
 

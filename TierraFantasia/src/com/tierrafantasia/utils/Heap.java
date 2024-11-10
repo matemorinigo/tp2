@@ -1,9 +1,9 @@
 package com.tierrafantasia.utils;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Heap<T extends Comparable<T>> {
-	
+/*	
 	private ArrayList<T> arr = new ArrayList<>();
 	
 	public Heap() {
@@ -73,5 +73,5 @@ public class Heap<T extends Comparable<T>> {
 	private T minimo(T x, T y) {
 		return (x.compareTo(y) == -1) ? x : y;
 	}
-	
+*/
 }

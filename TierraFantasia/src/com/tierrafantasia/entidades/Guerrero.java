@@ -1,6 +1,6 @@
 package com.tierrafantasia.entidades;
 
-public class Guerrero /*implements Comparable<Guerrero>*/{
+public class Guerrero implements UnidadDeCombate /*implements Comparable<Guerrero>*/{
 	private double saludInicial;
 	private double saludActual;
 	private int basicDamage;
@@ -12,8 +12,8 @@ public class Guerrero /*implements Comparable<Guerrero>*/{
 		this.basicDamage = basicDamage;
 	}
 
-
-	public void atacar(Guerrero enemigo) {
+	
+	public void atacar(UnidadDeCombate enemigo) {
 		enemigo.esAtacado(this.basicDamage);
 	}
 
@@ -59,13 +59,13 @@ public class Guerrero /*implements Comparable<Guerrero>*/{
 	protected void setDesmayado(boolean desmayado) {
 		this.desmayado = desmayado;
 	}
-
+/*
 	@Override
 	public String toString() {
 		return "Guerrero [saludInicial=" + saludInicial + ", saludActual=" + saludActual + ", basicDamage="
 				+ basicDamage + ", desmayado=" + desmayado + "]";
 	}
-
+*/
 //	@Override
 //	public int compareTo(Guerrero o) {
 //		int aux = this.bando.compareTo(o.bando);

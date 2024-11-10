@@ -9,7 +9,7 @@ public class Radaiteran extends Guerrero{
 	}
 
 	@Override
-	public void atacar(Guerrero enemigo) {
+	public void atacar(UnidadDeCombate enemigo) {
 		int damage = this.getBasicDamage() + (3*this.cantAtaquesDados);
 		enemigo.esAtacado(damage);
 		this.cantAtaquesDados++;

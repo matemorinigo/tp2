@@ -1,5 +1,5 @@
 package com.tierrafantasia.utils;
-
+/*
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,10 +8,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-
+*/
 
 public class FileManager {
-	
+/*	
 	public static final String ruta1 = "..\\TierraFantasia\\res\\ejemplo1.txt";
 	public static final String ruta2 = "..\\TierraFantasia\\res\\ejemplo2.txt";
 	public static final String ruta3 = "..\\TierraFantasia\\res\\ejemplo3.txt";
@@ -112,6 +112,6 @@ public class FileManager {
 			return false;
 		}
 	}
-
+*/
 
 }

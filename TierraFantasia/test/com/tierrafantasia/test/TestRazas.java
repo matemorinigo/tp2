@@ -1,10 +1,16 @@
 package com.tierrafantasia.test;
 
 
-import com.tierrafantasia.app.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
 import com.tierrafantasia.entidades.*;
-//import org.junit.jupiter.api.*;
-//import static org.junit.jupiter.api.Assertions.*;
+
 
 class TestRazas {
 
@@ -46,7 +52,7 @@ class TestRazas {
 	lo que hace que no pueda atacar, pero reduce el daño entrante en 1/2.
 	*/
 
-	//@BeforeEach
+	@BeforeEach
 	public void setup() {
 		wrives = new Ejercito(cantUnidades, Raza.WRIVES, Bando.ALIADO);
 		reralopes = new Ejercito(cantUnidades, Raza.RERALOPES, Bando.ALIADO);
@@ -54,34 +60,76 @@ class TestRazas {
 		nortaichian = new Ejercito(cantUnidades, Raza.NORTAICHIAN, Bando.ALIADO);
 	}
 
-	///no hay mas metodo atacar entre ejercitos, ahora es batalla
-
-//	@Test
-//	void testAtacar() {
-//		nortaichian.atacar(wrives);
-//		//108 - (18*2) = 72
-//		//el daño que reciben los wrives es el doble de lo normal
-//		assertEquals(72,wrives.unidades.getFirst().getSaludActual(), 0.00001);
-//		//La salud del nortaichian no deberia modificarse porque no esta herido
-//		assertEquals(66,nortaichian.unidades.getFirst().getSaludActual(),0.00001);
-//	}
-//
-//	@Test
-//	void testDescansar() {
-//		//verificamos que el tamaño de nuestro ejercito es cantUnidades
-//		assertEquals(cantUnidades,reralopes.unidades.size());
-//		reralopes.descansar(nortaichian);
-//		//despues de descansar vamos a tener la mitad del otro ejercito, por lo que
-//		//reralopes van a tener 15 unidades mientras que nortaichian van a tener su mitad
-//		assertEquals(cantUnidades*1.5,reralopes.unidades.size(),0.00001);
-//		assertEquals((double) cantUnidades*0.5,nortaichian.unidades.size(),0.00001);
-//		//reralopes.atacar(radaiteran);
-//		//36 -
-
-	//}
-
-
-
-
-
+	@Test
+	void testBatalla() {
+		nortaichian.batalla(reralopes);
+		radaiteran.batalla(wrives);
+		assertEquals(0, wrives.getCantUnidades());
+	}
+	
+	@Test
+	void testBatallaSinUnidades() {
+		radaiteran = new Ejercito(0,Raza.RADAITERAN, Bando.ALIADO);
+		nortaichian = new Ejercito(0, Raza.NORTAICHIAN, Bando.ALIADO);
+		radaiteran.batalla(nortaichian);
+	}
+	
+	@Test
+	void testDescansar() {
+		Pueblo puebloWrives = new Pueblo(wrives,wrives.bando);
+		nortaichian.setAliado(puebloWrives.ejercito);
+		nortaichian.descansar();
+		assertEquals(cantUnidades*1.5, nortaichian.getCantUnidades());
+		assertEquals(cantUnidades*0.5, wrives.getCantUnidades());
+		
+		wrives.setAliado(radaiteran);
+		wrives.descansar();
+		
+		reralopes.setAliado(nortaichian);
+		reralopes.descansar();
+		nortaichian.batalla(radaiteran);
+	}
+	
+	@Test
+	void testRazaNull() {
+		assertThrows(NullPointerException.class, () -> {
+			new Ejercito(cantUnidades, null, Bando.ALIADO);
+		});
+	}
+	
+	@Test
+	void testGuerreros() {
+		Guerrero g1 = new Guerrero(100,50);
+		Guerrero g2 = new Guerrero(100,50);
+	
+		g1.atacar(g2);
+		
+		assertEquals(50, g2.getSaludActual());
+		g2.descansar();
+		assertEquals(50, g2.getSaludActual());
+		//descansar no hace nada
+	}
+	
+	@Test
+	void testWrives() {
+		for(int i = 0; i < 3; i++)
+			wrives.atacar(nortaichian);
+		
+	}
+	
+	@Test
+	void testReralopes() {
+		Reralopes g1 = new Reralopes();
+		
+		for(int i = 0; i < 5; i++)
+			g1.atacar(wrives);
+		
+		g1.descansar();
+		
+		for(int i = 0; i < 5; i++)
+			g1.atacar(wrives);
+		
+	}
+	
+	
 }

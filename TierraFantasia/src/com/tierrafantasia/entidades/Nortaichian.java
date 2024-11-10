@@ -10,7 +10,7 @@ public class Nortaichian extends Guerrero{
 	}
 
 	@Override
-	public void atacar(Guerrero enemigo) {
+	public void atacar(UnidadDeCombate enemigo) {
 		if(this.esPiedra == 0) {
 			int damage = this.getBasicDamage();
 			double salud = this.getSaludActual()*1.04;

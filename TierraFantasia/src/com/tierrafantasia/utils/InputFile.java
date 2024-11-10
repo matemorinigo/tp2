@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class InputFile {
@@ -57,7 +56,12 @@ public class InputFile {
             cantUnidades = sc.nextInt();
 
             try {
+            	//es muy villera esta opcion?
+            	//pregunto para saber
+            	//raza = Raza.valueOf(sc.next().toUpperCase());
                 raza = ParsingUtils.parseRaza(sc.next());
+                
+                //bando = Bando.valueOf(sc.next().toUpperCase());
                 bando = ParsingUtils.parseBando((sc.next()));
                 pueblos.put(i+1, new Pueblo(new Ejercito(cantUnidades, raza, bando), bando));
                 sc.close();

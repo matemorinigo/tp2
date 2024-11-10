@@ -12,7 +12,7 @@ public class Reralopes extends Guerrero{
 	}
 
 	@Override
-	public void atacar(Guerrero enemigo) {
+	public void atacar(UnidadDeCombate enemigo) {
 		if (ataquesTotales >= 4) {
 			ataquesTotales = 0;
 			ataquesErrados = 0;

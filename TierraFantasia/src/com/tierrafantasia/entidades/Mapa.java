@@ -120,7 +120,8 @@ public class Mapa {
 			Pueblo pueblo = pueblos.get(puebloSiguiente);
 			cantDias += (int)pd.getDistancia(puebloSiguiente) / KM_POR_DIA;
 			if(pueblo.bando == Bando.ALIADO){
-				puebloPropio.ejercito.descansar(pueblo.ejercito);
+				puebloPropio.ejercito.setAliado(pueblo.ejercito);
+				puebloPropio.ejercito.descansar();
 
 			} else {
 				puebloPropio.ejercito.batalla(pueblo.ejercito);
