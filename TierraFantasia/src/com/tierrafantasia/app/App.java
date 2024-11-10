@@ -13,12 +13,12 @@ public class App {
 		try{
 			juego();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	
 	
-	public static void juego() throws IOException {
+	public static void juego() {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("Ingrese el nombre del archivo: ");
@@ -30,7 +30,7 @@ public class App {
 		Mapa mapa = Mapa.getMapaUnico();
 		Predecesor_Distancia pd = mapa.dijkstra(file.getPuebloInicio());
 
-		mapa.recorrerMapa(pd, file.getPuebloInicio(), file.getPuebloFin());
+		mapa.recorrerMapa(pd);
 
 	}
 	

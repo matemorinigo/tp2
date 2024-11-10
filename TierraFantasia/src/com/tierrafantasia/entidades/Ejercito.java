@@ -2,20 +2,12 @@ package com.tierrafantasia.entidades;
 
 import java.util.LinkedList;
 
-//import com.tierrafantasia.utils.Heap;
-
-
-
 
 public class Ejercito implements UnidadDeCombate{
 
 	public LinkedList<Guerrero> unidades = new LinkedList<Guerrero>();
-	public  Bando bando;
-	public Ejercito aliado;
 	
-	public Ejercito(int cantUnidades, Raza raza, Bando bando) {
-
-		this.bando = bando;
+	public Ejercito(int cantUnidades, Raza raza) {
 		switch (raza) {
 			case WRIVES -> sumaWrives(cantUnidades);
 			case RERALOPES -> sumaReralopes(cantUnidades);
@@ -32,7 +24,7 @@ public class Ejercito implements UnidadDeCombate{
 			enemigo.atacar(this);
 		}
 		
-		if(!this.sinUnidades()){		//si me quedaron peleadores y hay un herido, se manda atras de tod0
+		if(!this.sinUnidades()){		//si me quedaron guerreros y hay un herido, se manda atras de todo
 			Guerrero guerreroAliado = this.unidades.getFirst();
 			if(guerreroAliado.getSaludActual()!=guerreroAliado.getSaludInicial()){
 				this.unidades.removeFirst();
@@ -48,28 +40,21 @@ public class Ejercito implements UnidadDeCombate{
 	//para poder hacer que el metodo fuera comun entre guerrero y ejercito
 	//el ejercito aliado que se va a sumar no se pasa por parametro como antes sino que ya tiene que ser
 	//un atributo de la instancia, esto ya estaria configurado en el metodo RecorrerMapa y esta en las pruebas
-	public void descansar() {
-		
+	public void descansar(){
 		for (Guerrero guerrero : this.unidades){  //se aplica la funcion descansar a los aliados
 			guerrero.descansar();
 		}
-		
-		int mitad = aliado.unidades.size()/2;
-		for(int i = 0; i < mitad; i++)
-			this.unidades.addFirst(aliado.unidades.removeFirst());
-		
-	}
-	
-	public void setAliado(Ejercito aliado) {
-		this.aliado = aliado;
 	}
 
-	
+	public void sumarAliados(Ejercito aliado) {
+		int mitad = aliado.unidades.size() / 2;
+		for (int i = 0; i < mitad; i++)
+			this.unidades.addFirst(aliado.unidades.removeFirst());
+	}
+
 	public void atacar(UnidadDeCombate enemigo) {
-		Ejercito ejEnemigo = (Ejercito) enemigo;
-		if(this != enemigo && !ejEnemigo.sinUnidades() && !this.sinUnidades()) {
+		if(this != enemigo && !this.sinUnidades()) {
 			this.unidades.getFirst().atacar(enemigo);
-			
 		}
 	}
 
@@ -109,6 +94,7 @@ public class Ejercito implements UnidadDeCombate{
 		for(int i = 0; i < cantASumar; i++)
 			unidades.add(new Nortaichian());
 	}
+
 
 }
 

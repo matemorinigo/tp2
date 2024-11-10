@@ -56,14 +56,11 @@ public class InputFile {
             cantUnidades = sc.nextInt();
 
             try {
-            	//es muy villera esta opcion?
-            	//pregunto para saber
-            	//raza = Raza.valueOf(sc.next().toUpperCase());
-                raza = ParsingUtils.parseRaza(sc.next());
-                
-                //bando = Bando.valueOf(sc.next().toUpperCase());
-                bando = ParsingUtils.parseBando((sc.next()));
-                pueblos.put(i+1, new Pueblo(new Ejercito(cantUnidades, raza, bando), bando));
+
+                raza = Raza.valueOf(sc.next().toUpperCase());
+
+                bando = Bando.valueOf(sc.next().toUpperCase());
+                pueblos.put(i+1, new Pueblo(new Ejercito(cantUnidades, raza), bando));
                 sc.close();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -85,7 +82,7 @@ public class InputFile {
             ciudadDestino = sc.nextInt();
             costo = sc.nextInt();
 
-            matrizAdyacencia[ciudadOrigen-1][ciudadDestino-1] = costo;
+            matrizAdyacencia[ciudadOrigen-1][ciudadDestino-1] = costo+10;
 
             sc.close();
         }

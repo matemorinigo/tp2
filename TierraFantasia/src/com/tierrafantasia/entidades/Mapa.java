@@ -38,22 +38,6 @@ public class Mapa {
 		this.pueblos = pueblos;
 	}
 
-	public double[][] getMatAdy() {
-		return matAdy;
-	}
-
-	public int getPuebloInicial() {
-		return puebloInicial;
-	}
-
-	public int getPuebloFinal() {
-		return puebloFinal;
-	}
-
-	public Pueblo getPueblo(Integer numPueblo) {
-		return this.pueblos.get(numPueblo);
-	}
-
 	private int nodo_mas_cercano_sin_visitar(boolean[] visitados, double[] distancias){
 		int nodo_menor = 0;
 		double distancia_min = Double.POSITIVE_INFINITY;
@@ -105,13 +89,19 @@ public class Mapa {
 		return  new Predecesor_Distancia(predecesores, distancias);
 	}
 
-	public void recorrerMapa(Predecesor_Distancia pd, int puebloInicial, int puebloFinal){
+	public void recorrerMapa(Predecesor_Distancia pd){
 		Stack<Integer> pila = new Stack<Integer>();
-		Pueblo puebloPropio = pueblos.get(puebloInicial);
-		pila.push(puebloFinal);
+		Pueblo puebloPropio = pueblos.get(this.puebloInicial);
+		if(pd.getDistancia(this.puebloFinal) == Double.POSITIVE_INFINITY){
+			System.out.println("La mision no es factible, no hay ningun camino hacia el pueblo " + puebloFinal);
+			return;
+		}
+
+
+		pila.push(this.puebloFinal);
 		int cantDias = 0;
-		int i=puebloFinal;
-		while((i=pd.getPredecesor(i))!=puebloInicial){
+		int i=this.puebloFinal;
+		while((i=pd.getPredecesor(i))!=this.puebloInicial){
 			pila.push(i);
 		}
 
@@ -120,14 +110,16 @@ public class Mapa {
 			Pueblo pueblo = pueblos.get(puebloSiguiente);
 			cantDias += (int)pd.getDistancia(puebloSiguiente) / KM_POR_DIA;
 			if(pueblo.bando == Bando.ALIADO){
-				puebloPropio.ejercito.setAliado(pueblo.ejercito);
 				puebloPropio.ejercito.descansar();
+				puebloPropio.ejercito.sumarAliados(pueblo.ejercito);
 
 			} else {
-				puebloPropio.ejercito.batalla(pueblo.ejercito);
+				if(puebloPropio.ejercito.batalla(pueblo.ejercito) == 0){
+					System.out.println("La mision no es factible, perderiamos contra el pueblo " + puebloSiguiente);
+					return;
+				}
 			}
 
-			cantDias++;
 		}
 
 		System.out.println("La mision es factible");

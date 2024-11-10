@@ -59,13 +59,13 @@ public class Guerrero implements UnidadDeCombate /*implements Comparable<Guerrer
 	protected void setDesmayado(boolean desmayado) {
 		this.desmayado = desmayado;
 	}
-/*
+
 	@Override
 	public String toString() {
 		return "Guerrero [saludInicial=" + saludInicial + ", saludActual=" + saludActual + ", basicDamage="
 				+ basicDamage + ", desmayado=" + desmayado + "]";
 	}
-*/
+
 //	@Override
 //	public int compareTo(Guerrero o) {
 //		int aux = this.bando.compareTo(o.bando);

@@ -2,7 +2,7 @@ package com.tierrafantasia.entidades;
 
 public class Radaiteran extends Guerrero{
 
-	private int cantAtaquesDados = 0;
+		private int cantAtaquesDados = 0;
 
 	public Radaiteran() {
 		super(36, 56);

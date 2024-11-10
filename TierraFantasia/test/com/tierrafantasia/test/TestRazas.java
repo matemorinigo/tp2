@@ -54,10 +54,10 @@ class TestRazas {
 
 	@BeforeEach
 	public void setup() {
-		wrives = new Ejercito(cantUnidades, Raza.WRIVES, Bando.ALIADO);
-		reralopes = new Ejercito(cantUnidades, Raza.RERALOPES, Bando.ALIADO);
-		radaiteran = new Ejercito(cantUnidades, Raza.RADAITERAN, Bando.ALIADO);
-		nortaichian = new Ejercito(cantUnidades, Raza.NORTAICHIAN, Bando.ALIADO);
+		wrives = new Ejercito(cantUnidades, Raza.WRIVES);
+		reralopes = new Ejercito(cantUnidades, Raza.RERALOPES);
+		radaiteran = new Ejercito(cantUnidades, Raza.RADAITERAN);
+		nortaichian = new Ejercito(cantUnidades, Raza.NORTAICHIAN);
 	}
 
 	@Test
@@ -69,23 +69,23 @@ class TestRazas {
 	
 	@Test
 	void testBatallaSinUnidades() {
-		radaiteran = new Ejercito(0,Raza.RADAITERAN, Bando.ALIADO);
-		nortaichian = new Ejercito(0, Raza.NORTAICHIAN, Bando.ALIADO);
+		radaiteran = new Ejercito(0,Raza.RADAITERAN);
+		nortaichian = new Ejercito(0, Raza.NORTAICHIAN);
 		radaiteran.batalla(nortaichian);
 	}
 	
 	@Test
 	void testDescansar() {
-		Pueblo puebloWrives = new Pueblo(wrives,wrives.bando);
-		nortaichian.setAliado(puebloWrives.ejercito);
+		Pueblo puebloWrives = new Pueblo(wrives, Bando.ALIADO);
+		nortaichian.sumarAliados(puebloWrives.ejercito);
 		nortaichian.descansar();
 		assertEquals(cantUnidades*1.5, nortaichian.getCantUnidades());
 		assertEquals(cantUnidades*0.5, wrives.getCantUnidades());
 		
-		wrives.setAliado(radaiteran);
+		wrives.sumarAliados(radaiteran);
 		wrives.descansar();
 		
-		reralopes.setAliado(nortaichian);
+		reralopes.sumarAliados(nortaichian);
 		reralopes.descansar();
 		nortaichian.batalla(radaiteran);
 	}
@@ -93,7 +93,7 @@ class TestRazas {
 	@Test
 	void testRazaNull() {
 		assertThrows(NullPointerException.class, () -> {
-			new Ejercito(cantUnidades, null, Bando.ALIADO);
+			new Ejercito(cantUnidades, null);
 		});
 	}
 	
