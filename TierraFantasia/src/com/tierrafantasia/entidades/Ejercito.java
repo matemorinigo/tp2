@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Ejercito {
 
-	//public Heap<Guerrero> unidades = new Heap<>();
 	public List<Guerrero> unidades = new ArrayList<Guerrero>();
 	public  Bando bando;
+
 	public Ejercito(int cantUnidades, Raza raza, Bando bando) {
 
 		this.bando = bando;
@@ -21,47 +21,39 @@ public class Ejercito {
 			case NORTAICHIAN -> sumaNortaichian(cantUnidades);
 		}
 	}
-	//carga la Lista de guerreros
 
-	//El ejercito agarra al primer guerrero, este guerrero ataca al ejercito enemigo
-//	public void atacar(Ejercito enemigo) {
-//		Guerrero unidad = this.unidades.get(0);
-//		if (enemigo.sinUnidades() && unidad.getSaludActual() != unidad.getSaludInicial()) { //si no hay mas enemigos y el soldado esta herido, va al final de la cola
-//			this.unidades.remove(0);
-//			this.unidades.add(unidad);
-//		} else {
-//			unidad.atacar(enemigo);
-//		}
 
-	// no sé si hace falta preguntar si no hay enemigos, a este //método siempre llega cuando sí hay, y creo que otra la condición hace que nunca pelee un herido y entraría en bucle
-
-	public boolean batalla(Ejercito enemigo){
+	public int batalla(Ejercito enemigo){
 		Guerrero guerreroAliado = this.unidades.getFirst();
 		Guerrero guerreroEnemigo = enemigo.unidades.getFirst();
 
-		while(!this.sinUnidades() && !enemigo.sinUnidades()){
+		while(!this.sinUnidades() && !enemigo.sinUnidades()){ //pelea a muerte
 
-			while(!guerreroAliado.isDesmayado() || !guerreroEnemigo.isDesmayado()){
+			while(!guerreroAliado.isDesmayado()){		//mientras no se desmaye el nuestro que pelee con el otro
 				guerreroAliado.atacar(guerreroEnemigo);
-				if(!guerreroEnemigo.)
+				if(!guerreroEnemigo.isDesmayado()){			// si el otro se desmaya, pasa el siguiente, y sino le pega al nuestro
+					guerreroEnemigo.atacar(guerreroAliado);
+				} else {
+					enemigo.unidades.removeFirst();
+					guerreroEnemigo = enemigo.unidades.getFirst();
+				}
 			}
 
+			this.unidades.removeFirst();			//si se desmayo el nuestro, se reasigna
+			guerreroAliado = this.unidades.getFirst();
+
 		}
-
-
-		return false;
+		if(!this.sinUnidades()){		//si me quedaron peleadores y hay un herido, se manda atras de tod0
+			if(guerreroAliado.getSaludActual()!=guerreroAliado.getSaludInicial()){
+				this.unidades.removeFirst();
+				this.unidades.add(guerreroAliado);
+			}
+			return this.getCantUnidades();		//se devuelve la cantidad de sobrevivientes
+		}
+		return 0; //si no hay sobrevivientes se devuelve 0
 	}
 
-	/*para poder hacer algo como
-	mientras(hayaEjercito1, hayaEjercito2) {
-		guerrero1 = ejercito1.unidad.getFirst()
-		guerrero2 = ejercito2.unidad.getFirst()
-		while(!guerrero1.desmayado() || !guerrero2.desmayado()){
-		guerrero1.atacar(guerrero2)
-		guerrero2.atacar(guerrero1)
-}
-	 */
-//https://docs.google.com/document/d/1qtNQxtsFG6et27j49AROzUBzbk0NxiWSIVQeyAyeLsY/edit?usp=sharing el link al docs, peguenlo en wpp q no tengo bateria gracias
+
 
 
 	public void descansar(Ejercito aliado) {
@@ -84,14 +76,6 @@ public class Ejercito {
 		if(unidad.isDesmayado())  //si se queda sin salud, se saca de la cola
 			this.unidades.remove(unidad);
 	}
-
-//	public void batalla(Ejercito enemigo) {
-//		while(!this.sinUnidades() && !enemigo.sinUnidades()) {
-//			this.atacar(enemigo);
-//			if(!enemigo.sinUnidades())
-//				enemigo.atacar(this);
-//		}
-//	}
 
 	public boolean sinUnidades() {
 		return this.unidades.isEmpty();

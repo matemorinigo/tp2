@@ -11,23 +11,7 @@ public class Wrives extends Guerrero{
 
 	@Override
 	public void atacar(Guerrero enemigo) {
-		if(!this.equals(enemigo) && !this.isDesmayado() && this.fueAtacado) {
-			int damage = this.getBasicDamage();
-
-			if(this.cantAtaquesDados == 2) {
-				damage *= 2;
-				this.cantAtaquesDados = 0;
-			} else {
-				this.cantAtaquesDados++;
-			}
-
-			enemigo.esAtacado(damage);
-		}
-	}
-
-	@Override
-	public void atacar(Ejercito enemigo) {
-		if(!this.equals(enemigo.unidades.get(0)) && !this.isDesmayado() && this.fueAtacado) {
+		if(this.fueAtacado) {
 			int damage = this.getBasicDamage();
 
 			if(this.cantAtaquesDados == 2) {
@@ -57,15 +41,12 @@ public class Wrives extends Guerrero{
 
 	@Override
 	public void descansar() {
-		if(!this.isDesmayado()) {
 			double aux = this.getSaludActual();
 			this.fueAtacado = false;
 			this.setSaludInicial(this.getSaludInicial()+50);
 
-			if(aux+50 <= this.getSaludInicial())
+			if(aux+50 <= this.getSaludInicial()){
 				this.setSaludActual(aux+50);
-
-
 		}
 	}
 }

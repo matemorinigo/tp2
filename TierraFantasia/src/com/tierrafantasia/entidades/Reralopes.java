@@ -1,7 +1,11 @@
 package com.tierrafantasia.entidades;
 
+import java.util.Random;
+
 public class Reralopes extends Guerrero{
 	private int concentracion = 0;
+	private int ataquesErrados = 0;
+	private int ataquesTotales = 0;
 
 	public Reralopes() {
 		super(53, 27);
@@ -9,31 +13,26 @@ public class Reralopes extends Guerrero{
 
 	@Override
 	public void atacar(Guerrero enemigo) {
-		if(!this.equals(enemigo) && !this.isDesmayado()) {
-			int damage = this.getBasicDamage();
+		if (ataquesTotales >= 4) {
+			ataquesTotales = 0;
+			ataquesErrados = 0;
+		}
+		// Erra 2 de cada 4 ataques
+		boolean acierto = ataquesErrados < 2 ? ataqueAcertado() : true;
 
-			if(this.concentracion > 0) {
-				damage *= 2;
-				this.concentracion--;
-			}
-
+		int damage = getBasicDamage();
+		if (concentracion > 0) {
+			damage *= 2;
+			concentracion--;
+		}
+		ataquesTotales++;
+		if (acierto) {
 			enemigo.esAtacado(damage);
+		} else {
+			ataquesErrados++;
 		}
 	}
 
-	@Override
-	public void atacar(Ejercito enemigo) {
-		if(!this.equals(enemigo.unidades.get(0)) && !this.isDesmayado()) {
-			int damage = this.getBasicDamage();
-
-			if(this.concentracion > 0) {
-				damage *= 2;
-				this.concentracion--;
-			}
-
-			enemigo.esAtacado(damage);
-		}
-	}
 
 	@Override
 	public void esAtacado(int damage) {
@@ -52,4 +51,10 @@ public class Reralopes extends Guerrero{
 	public void descansar() {
 		this.concentracion = 3;
 	}
+
+	public  boolean ataqueAcertado() {
+		Random random = new Random();
+		return random.nextBoolean();
+	}
+
 }

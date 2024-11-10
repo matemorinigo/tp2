@@ -17,10 +17,6 @@ public class Guerrero /*implements Comparable<Guerrero>*/{
 		enemigo.esAtacado(this.basicDamage);
 	}
 
-	public void atacar(Ejercito enemigo) {
-		enemigo.esAtacado(this.basicDamage);
-	}
-
 	public void descansar() {
 
 	}
