@@ -89,8 +89,24 @@ public class Mapa {
 		return  new Predecesor_Distancia(predecesores, distancias);
 	}
 
+	/*
+	* El recorrido del mapa funciona de la siguiente manera:
+	*
+	* Utilizamos una pila, donde pondremos el camino hacia la Tierra de Fantasia
+	* Ayudandonos con el vector de predecesores el flujo es el siguiente:
+	* - Apilamos el pueblo final
+	* - Buscamos su predecesor, y lo apilamos
+	* - Repetimos buscando predecesores hasta que nuestro i sea el pueblo inicial
+	*
+	* De esta forma, a medida que sacamos pueblos de la pila, se respeta el recorrido
+	*
+	* Luego mientras la pila no este vacia, sacamos un pueblo y evaluamos si es aliado o enemigo para continuar
+	*
+	*
+	* */
+
 	public void recorrerMapa(Predecesor_Distancia pd){
-		Stack<Integer> pila = new Stack<Integer>();
+		Stack<Integer> pila = new Stack<>();
 		Pueblo puebloPropio = pueblos.get(this.puebloInicial);
 		if(pd.getDistancia(this.puebloFinal) == Double.POSITIVE_INFINITY){
 			System.out.println("La mision no es factible, no hay ningun camino hacia el pueblo " + puebloFinal);
