@@ -126,9 +126,13 @@ class TestRazas {
 		
 		g1.descansar();
 		
-		for(int i = 0; i < 5; i++)
-			g1.atacar(wrives);
+		assertEquals(g1.getConcentracion(), 3);
 		
+		for(int i = 0; i < 3; i++)
+			g1.atacar(nortaichian);
+		
+		assertEquals(2,g1.getAtaquesErrados());	
+		assertEquals(4,g1.getAtaquesTotales());	
 	}
 	
 	

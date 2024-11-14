@@ -6,6 +6,7 @@ public class Reralopes extends Guerrero{
 	private int concentracion = 0;
 	private int ataquesErrados = 0;
 	private int ataquesTotales = 0;
+	
 
 	public Reralopes() {
 		super(53, 27);
@@ -18,7 +19,18 @@ public class Reralopes extends Guerrero{
 			ataquesErrados = 0;
 		}
 		// Erra 2 de cada 4 ataques
-		boolean acierto = ataquesErrados < 2 ? ataqueAcertado() : true;
+		boolean acierto;
+		
+		//si ya erro 2 ataques los proximos van a ser aciertos
+		if(ataquesErrados > 1)
+			acierto = true;
+		//si ataco 3 veces y erro menos 
+		else if(ataquesTotales >= 2 && ataquesErrados < 2)
+			acierto = false;
+		else 
+			acierto = ataqueAcertado();
+		
+		//acierto = ataquesErrados < 2 ? ataqueAcertado() : true;
 
 		int damage = getBasicDamage();
 		if (concentracion > 0) {
@@ -55,6 +67,18 @@ public class Reralopes extends Guerrero{
 	public  boolean ataqueAcertado() {
 		Random random = new Random();
 		return random.nextBoolean();
+	}
+
+	public int getConcentracion() {
+		return concentracion;
+	}
+
+	public int getAtaquesErrados() {
+		return ataquesErrados;
+	}
+
+	public int getAtaquesTotales() {
+		return ataquesTotales;
 	}
 
 }

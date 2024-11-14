@@ -4,8 +4,6 @@ import com.tierrafantasia.entidades.*;
 import com.tierrafantasia.utils.InputFile;
 
 
-import java.io.*;
-
 import java.util.Scanner;
 
 public class App {
