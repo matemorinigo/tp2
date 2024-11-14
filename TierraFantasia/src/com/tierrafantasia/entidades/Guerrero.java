@@ -1,6 +1,6 @@
 package com.tierrafantasia.entidades;
 
-public class Guerrero implements UnidadDeCombate /*implements Comparable<Guerrero>*/{
+public class Guerrero implements UnidadDeCombate{
 	private double saludInicial;
 	private double saludActual;
 	private int basicDamage;
@@ -65,17 +65,4 @@ public class Guerrero implements UnidadDeCombate /*implements Comparable<Guerrer
 		return "Guerrero [saludInicial=" + saludInicial + ", saludActual=" + saludActual + ", basicDamage="
 				+ basicDamage + ", desmayado=" + desmayado + "]";
 	}
-
-//	@Override
-//	public int compareTo(Guerrero o) {
-//		int aux = this.bando.compareTo(o.bando);
-//		if(aux == 0) {
-//			if(this.saludActual > o.saludActual)
-//				return -1;
-//			else
-//				return 1;
-//		}
-//
-//		return aux;
-//	}
 }
