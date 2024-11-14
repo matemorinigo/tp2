@@ -33,14 +33,15 @@ public class Nortaichian extends Guerrero{
 
 	@Override
 	public void esAtacado(int damage) {
-		if(!this.isDesmayado()) {
+		if(!this.isDesmayado() && this.getSaludActual() > damage) {
 			if(esPiedra > 0) {
 				damage *= 0.5;
 				this.esPiedra--;
 			}
 			this.setSaludActual(this.getSaludActual()-damage);
 			this.furia = 2;
-		}
+		}else
+			this.setDesmayado(true);
 
 	}
 
